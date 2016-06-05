@@ -22,29 +22,29 @@
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <tr>
+                <td>City</td>
+                <td>{{data.location}}</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Updated Time</td>
+                <td>{{data.updatedTime | amDateFormat:'dddd, h:mm A'}}</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Weather</td>
+                <td>{{data.weatherCondition}}</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>Temperature</td>
+                <td><span ng-bind-html='data.temperature' /></td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>Wind</td>
+                <td><span ng-bind-html='data.windSpeed' /></td>
+            </tr>
         </tbody>
     </table>
 </div>

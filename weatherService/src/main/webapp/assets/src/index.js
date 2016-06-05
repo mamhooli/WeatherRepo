@@ -1,5 +1,5 @@
     
-var app = angular.module('myApp', ['ngResource', 'ngRoute',  'ngMaterial']);
+var app = angular.module('myApp', ['ngResource', 'ngRoute',  'ngMaterial','angularMoment']);
 
 
 app.config(
@@ -17,15 +17,7 @@ app.config(
 );
 
 app.factory('WeatherFactory', function($resource) {
-  return $resource("/api/weather/:location", {}, {
-            get: {
-                method: 'GET',
-                isArray: true,
-                transformResponse: function(data, headers){
-                    return data;
-                }
-            }
-        });
+  return $resource("/api/weather/:location");
 });
 
 app.factory('LocationFactory', function($resource) {
@@ -88,22 +80,26 @@ app.controller("SearchCtrl", function (WeatherService, LocationService, $scope) 
     console.log("I am SearchCtrl");
     $scope.data = {};
     LocationService.getLocations(function(data) {
-        console.log("data " + JSON.stringify(data));
         $scope.data.availableOptions = data;
         $scope.data.selectedLocation = data[0];
+        WeatherService.getWeatherDetailByLocation($scope.data.selectedLocation.locationName);
     })
    
     $scope.searchWeather = function() {
-        alert($scope.data.selectedLocation.locationName);
         WeatherService.getWeatherDetailByLocation($scope.data.selectedLocation.locationName);
     };
 });
 
-app.controller("SearchResultCtrl", function (WeatherService, $scope) {
+app.controller("SearchResultCtrl", function (WeatherService, $scope,$sce) {
     console.log("I am SearchCtrl");
     WeatherService.registerVisitor(this);
+    $scope.data = {};
     this.visit = function(data) {
-        console.log("searchResult-1>>" + data);
+        console.log("data " + JSON.stringify(data));
+        data.updatedTime = new Date(data.updatedTime);
+        data.temperature = $sce.trustAsHtml(data.temperature + '&deg;C');
+        data.windSpeed = $sce.trustAsHtml(data.windSpeed + 'km/h');
+        $scope.data = data;
     }
 });
 

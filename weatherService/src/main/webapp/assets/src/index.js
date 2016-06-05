@@ -17,11 +17,11 @@ app.config(
 );
 
 app.factory('WeatherFactory', function($resource) {
-  return $resource("/api/weather/:location");
+  return $resource("api/weather/:location");
 });
 
 app.factory('LocationFactory', function($resource) {
-  return $resource("/api/location/");
+  return $resource("api/location/");
 });
 
 app.service('LocationService', function(LocationFactory) {

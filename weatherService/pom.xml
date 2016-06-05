@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>weatherService</groupId>
 	<artifactId>weatherService</artifactId>
@@ -145,20 +145,8 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.17</version>
 			</plugin>
-			<plugin>
-	            <groupId>org.apache.tomcat.maven</groupId>
-	            <artifactId>tomcat7-maven-plugin</artifactId>
-	            <version>2.2</version>
-	            <configuration>
-		            <url>http://localhost:8080/manager/text</url>
-		            <server>tomcat</server>
-		            <path>/weatherService</path>
-		            <username>tomcat</username>
-		            <password>tomcat</password>
-	            </configuration>
-            </plugin>
 		</plugins>
 
-		<finalName>weatherService</finalName>
+		<finalName>weather-rest</finalName>
 	</build>
 </project>

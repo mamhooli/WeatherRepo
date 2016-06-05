@@ -17,7 +17,34 @@ app.config(
 );
 
 app.factory('WeatherFactory', function($resource) {
-  return $resource("/api/weather/:location");
+  return $resource("/api/weather/:location", {}, {
+            get: {
+                method: 'GET',
+                isArray: true,
+                transformResponse: function(data, headers){
+                    return data;
+                }
+            }
+        });
+});
+
+app.factory('LocationFactory', function($resource) {
+  return $resource("/api/location/");
+});
+
+app.service('LocationService', function(LocationFactory) {
+
+    var getLocations = function(cb) {
+        LocationFactory.query(function(searchResponse) {
+          console.log(searchResponse);
+          cb(searchResponse);
+        });
+    };
+
+    return {
+        getLocations: getLocations
+    };
+
 });
 
 app.service('WeatherService', function(WeatherFactory) {
@@ -29,7 +56,7 @@ app.service('WeatherService', function(WeatherFactory) {
   }
 
   var notifyAll = function() {
-    visitors.visit();
+    visitors.visit(searchResult);
   }
 
   var searchResult;
@@ -40,11 +67,13 @@ app.service('WeatherService', function(WeatherFactory) {
     }, function(searchResponse) {
       console.log(searchResponse);
       searchResult = searchResponse;
+      notifyAll();
     });
   }
 
   return {
-    getWeatherDetailByLocation: getWeatherDetailByLocation
+    registerVisitor: registerVisitor,
+    getWeatherDetailByLocation: getWeatherDetailByLocation,
   };
 });
 
@@ -55,14 +84,27 @@ app.controller("MenuCntrl", function ($scope, $route) {
 });
 
 
-app.controller("SearchCtrl", function (WeatherService, $scope) {
+app.controller("SearchCtrl", function (WeatherService, LocationService, $scope) {
     console.log("I am SearchCtrl");
-    $scope.search = function() {
-        WeatherService.getWeatherDetailByLocation($scope.searchLocation);
+    $scope.data = {};
+    LocationService.getLocations(function(data) {
+        console.log("data " + JSON.stringify(data));
+        $scope.data.availableOptions = data;
+        $scope.data.selectedLocation = data[0];
+    })
+   
+    $scope.searchWeather = function() {
+        alert($scope.data.selectedLocation.locationName);
+        WeatherService.getWeatherDetailByLocation($scope.data.selectedLocation.locationName);
     };
 });
 
-app.controller("SearchResultCtrl", ['$scope', function ($scope) {
-    console.log("I am SearchResultCtrl");
-}]);
+app.controller("SearchResultCtrl", function (WeatherService, $scope) {
+    console.log("I am SearchCtrl");
+    WeatherService.registerVisitor(this);
+    this.visit = function(data) {
+        console.log("searchResult-1>>" + data);
+    }
+});
+
 

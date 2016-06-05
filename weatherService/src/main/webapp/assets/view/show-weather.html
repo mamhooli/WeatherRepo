@@ -1,17 +1,50 @@
 <!-- Template to display weather info -->
-<form ng-controller="SearchCtrl" class="ng-scope">
-	<p class="lead">Search Location - Weather</p>
-	<div class="input-group">
-		<input type="text" ng-model="searchLocation" class="form-control">
-		<div class="input-group-btn">
-			<button type="submit" class="btn btn-default" ng-click="search()">Search</button>
-		</div>
-	</div>
+<form ng-controller="SearchCtrl" class="ng-scope form-horizontal">
+    <p class="lead">Search Location - Weather</p>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Search Location:</label>
+        <div class="col-sm-10">
+            <select name="mySelect" class="form-control" ng-options="option.locationName for option in data.availableOptions track by option.id" ng-model="data.selectedLocation" ng-change="searchWeather()"></select>
+        </div>
+    </div>
 </form>
 <br />
 <div ng-controller="SearchResultCtrl" class="ng-scope">
-	<p class="lead page-header">Search Results</p>
-	<div ng-repeat="searchResult in searchResultList">
-		<div show-tv></div>
-	</div>
+    <p class="lead page-header">Search Results</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Field Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <tr>
+        </tbody>
+    </table>
 </div>

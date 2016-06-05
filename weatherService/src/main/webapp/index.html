@@ -1,5 +1,49 @@
+<!DOCTYPE html>
 <html>
-<body>
-<h2>Hello World!</h2>
-</body>
+
+    <head>
+        <title>Weather Info APP</title>
+        <!-- External CSS Dependecy -->
+        <link rel="stylesheet" type="text/css" href="assets/lib/css/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/lib/js/angular-material/angular-material.css">
+
+        <!-- customized CSS -->
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+        <!-- External JS Dependecy -->
+        <script src="assets/lib/js/angular.min.js"></script>
+        <script src="assets/lib/js/angular-resource.min.js"></script>
+        <script src="assets/lib/js/angular-route.min.js"></script>
+        <script src="assets/lib/js/angular-animate.js"></script>
+        <script src="assets/lib/js/angular-aria.js"></script>
+        <script src="assets/lib/js/angular-material/angular-material.js"></script>
+        <!-- customized JS -->
+        <script src="assets/src/index.js"></script>
+    </head>
+
+    <body>
+        <div class="site-wrapper">
+            <div class="site-wrapper-inner">
+
+                <div class="survey-container container" ng-app="myApp">
+                    <div class="navbar survey-menu" ng-controller="MenuCntrl">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" ng-class="{active: $route.current.activetab === 'task_1'}"><a href="/#/search">Weather Info</a></li>
+                            <div class="clearfix"></div>
+                        </ul>
+                    </div>
+                    <div class="survey-body" ng-view >
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+           ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/lib/js/jquery.min.js"></script>
+        <script src="assets/lib/css/bootstrap/js/bootstrap.min.js"></script>
+    </body>
+
 </html>

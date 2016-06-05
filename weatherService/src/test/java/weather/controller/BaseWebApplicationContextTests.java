@@ -20,7 +20,7 @@ import weather.service.WeatherService;
 import javax.annotation.Resource;
 
 /**
- * JUnit case to check app context
+ * JUnit base class to be run before each test
  * @author Mamata Hooli
  *
  */

@@ -15,7 +15,7 @@ import weather.repo.WeatherRepo;
  * @author Mamata Hooli
  *
  */
-public class LocationControllerTests extends BaseWebApplicationContextTests {
+public class LocationControllerTest extends BaseWebApplicationContextTests {
 
 	private JsonNode createTree(String jsonString) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
